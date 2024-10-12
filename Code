@@ -1,0 +1,44 @@
+#include <iostream>
+
+// Step 1: Function to calculate the length of the string manually
+int getLength(char* str) {
+    int length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
+
+// Step 2: Function to dynamically allocate memory for the reversed string
+char* allocateMemory(int length) {
+    return new char[length + 1]; // +1 for the null terminator
+}
+
+// Step 3: Function to reverse the string
+void reverseString(char* original, char* reversed, int length) {
+    for (int i = 0; i < length; i++) {
+        reversed[i] = original[length - i - 1];
+    }
+    reversed[length] = '\0'; // Adding the null terminator
+}
+
+// Step 4: Function to print both the original and reversed strings
+void printStrings(char* original, char* reversed) {
+    std::cout << "Original String: " << original << std::endl;
+    std::cout << "Reversed String: " << reversed << std::endl;
+}
+
+int main() {
+    char original[] = "practice";  // Example string
+
+    int length = getLength(original);  // Step 1
+    char* reversed = allocateMemory(length); // Step 2
+
+    reverseString(original, reversed, length); // Step 3
+    printStrings(original, reversed); // Step 4
+
+    // Freeing dynamically allocated memory
+    delete[] reversed;
+
+    return 0;
+}
